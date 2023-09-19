@@ -11,52 +11,37 @@ use escola;
 
 
 create table Aluno ( matricula int primary key auto_increment, nome varchar(80) not null, nascimento date, cpf char(14) not null unique, responsavel varchar(80) not null, email varchar(80) unique );
-
-
 create table Turma ( numero int primary key not null unique, turno char(1) not null, definicao varchar(60) not null  );
-
-
 create table Disciplina (cod_disciplina int primary key auto_increment, nome varchar(30) not null);
-
-
 create table Estuda ( idEstuda int primary key auto_increment, fk_Aluno_matricula int not null, fk_turma_numero int not null);
-
-
 create table possui ( idPossui int primary key auto_increment, fk_Disciplina_cod_disciplina int not null, fk_turma_numero int not null);
-
-
 create table professor (matricula int primary key auto_increment, nome varchar(80) not null, formacao varchar(30) not null );
-
-
 create table Leciona (idLeciona int primary key auto_increment, fk_Disciplina_cod_disciplina int not null, fk_Professor_matricula int not null);
 
 
 alter table leciona add constraint fkcoddisc foreign key (fk_Disciplina_cod_disciplina) references Disciplina (cod_disciplina);
-
-
 alter table leciona add constraint fkpromat foreign key (fk_Professor_matricula) references Professor (matricula);
-
-
 alter table estuda add constraint fkmat foreign key (fk_Aluno_matricula) references Aluno (matricula);
-
-
 alter table estuda add constraint fkturnum foreign key (fk_turma_numero) references Turma (numero);
-
-
 alter table possui add constraint fkdisc foreign key (fk_Disciplina_cod_disciplina) references Disciplina (cod_disciplina);
-
-
 alter table possui add constraint fknum foreign key (fk_turma_numero) references Turma (numero);
 
 
 insert into aluno values ( 3001, 'Godofredo Henrique', '2000-03-15', '123.456.789-01', 'Godojane Maia', 'gh@email.com'  ); 
-
-
 insert into aluno values ( null, 'Josefina Winter', '1945-02-10', '123.456.789-02', 'Clenisbaldo Winter', null  ); 
-
-
-
-
+insert into aluno values (null, 'Ana Carolina', '1984-12-5', '123.456.789-03', 'Maria Carolina', 'ac@email.com');
+insert into aluno ( matricula, nome, nascimento, cpf, responsavel, email )values (null, 'Elias Sherman', '1995-03-02','123.456.789-05', 'jonh Sherman', 'es@gmailcom');
+insert into aluno ( nome, cpf, responsavel)values ( 'Waldiney Mouse', '123.456.789-06', 'Wesley Keyboard' );
+into aluno ( cpf, matricula, nome, responsavel, email ) values ('123.456.789-07', null, 'Genivaldo Willians', 'Clotilde Willians', 'gw@gmail.com');
+insert into turma values ( 2023080, 'm', 'Técnico de Informática');
+insert into turma values ( 2023090, 'T', 'Técnico em Comunicação Visual');
+insert into estuda values ( 7501, 3001, 2023090 );
+insert into estuda values ( null, 3004, 2023080 );
+insert into estuda values ( null, 3002, 2023090 );
+insert into estuda values ( null, 3003, 2023080 );
+insert into estuda values ( null, 3005, 2023090 );
+insert into estuda values ( null, 3006, 2023080 );
+insert into estuda values ( null, 3004, 2023090 );
 
 
 
