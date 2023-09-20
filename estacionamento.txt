@@ -6,10 +6,10 @@ alter table veiculo rename to carro;
 
 insert into carro values ( 250, 'FIAT', 'Marea Turbo', 'ABC1234' );
 insert into carro values ( null, 'Honda', 'Civic', 'ABC1235' );
-insert into carro values ( 250, 'Volkswagen', 'Gol', 'ABC1236' );
-insert into carro values ( 250, 'Ford', 'Ka', 'ABC1237' );
-insert into carro values ( 250, 'Toyota', 'Corola', 'ABC1234' );
-insert into carro values (null, 'Toyota', 'Yaris','ABC1241');
+insert into carro values ( null, 'Volkswagen', 'Gol', 'ABC1236' );
+insert into carro values ( null, 'Ford', 'Ka', 'ABC1237' );
+insert into carro values ( null, 'Toyota', 'Corola', 'ABC1238' );
+insert into carro values (null, 'Toyota', 'Yaris','ABC1239');
 
 delete from carro where idVeiculo = 250;
 

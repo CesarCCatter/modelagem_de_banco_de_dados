@@ -1,30 +1,37 @@
 create database escola;
-
-
 status;
-
-
 show databases;
-
-
 use escola;
 
 
+
 create table Aluno ( matricula int primary key auto_increment, nome varchar(80) not null, nascimento date, cpf char(14) not null unique, responsavel varchar(80) not null, email varchar(80) unique );
+
 create table Turma ( numero int primary key not null unique, turno char(1) not null, definicao varchar(60) not null  );
+
 create table Disciplina (cod_disciplina int primary key auto_increment, nome varchar(30) not null);
+
 create table Estuda ( idEstuda int primary key auto_increment, fk_Aluno_matricula int not null, fk_turma_numero int not null);
+
 create table possui ( idPossui int primary key auto_increment, fk_Disciplina_cod_disciplina int not null, fk_turma_numero int not null);
+
 create table professor (matricula int primary key auto_increment, nome varchar(80) not null, formacao varchar(30) not null );
+
 create table Leciona (idLeciona int primary key auto_increment, fk_Disciplina_cod_disciplina int not null, fk_Professor_matricula int not null);
+
 
 
 alter table leciona add constraint fkcoddisc foreign key (fk_Disciplina_cod_disciplina) references Disciplina (cod_disciplina);
 alter table leciona add constraint fkpromat foreign key (fk_Professor_matricula) references Professor (matricula);
+
 alter table estuda add constraint fkmat foreign key (fk_Aluno_matricula) references Aluno (matricula);
 alter table estuda add constraint fkturnum foreign key (fk_turma_numero) references Turma (numero);
+
 alter table possui add constraint fkdisc foreign key (fk_Disciplina_cod_disciplina) references Disciplina (cod_disciplina);
 alter table possui add constraint fknum foreign key (fk_turma_numero) references Turma (numero);
+
+alter table professor add email varchar(80) unique after nome;
+
 
 
 insert into aluno values ( 3001, 'Godofredo Henrique', '2000-03-15', '123.456.789-01', 'Godojane Maia', 'gh@email.com'  ); 
@@ -32,9 +39,13 @@ insert into aluno values ( null, 'Josefina Winter', '1945-02-10', '123.456.789-0
 insert into aluno values (null, 'Ana Carolina', '1984-12-5', '123.456.789-03', 'Maria Carolina', 'ac@email.com');
 insert into aluno ( matricula, nome, nascimento, cpf, responsavel, email )values (null, 'Elias Sherman', '1995-03-02','123.456.789-05', 'jonh Sherman', 'es@gmailcom');
 insert into aluno ( nome, cpf, responsavel)values ( 'Waldiney Mouse', '123.456.789-06', 'Wesley Keyboard' );
-into aluno ( cpf, matricula, nome, responsavel, email ) values ('123.456.789-07', null, 'Genivaldo Willians', 'Clotilde Willians', 'gw@gmail.com');
-insert into turma values ( 2023080, 'm', 'Técnico de Informática');
+insert into aluno ( cpf, matricula, nome, responsavel, email ) values ('123.456.789-07', null, 'Genivaldo Willians', 'Clotilde Willians', 'gw@gmail.com');
+insert into aluno ( nome, cpf, responsavel)values ( 'Judite Presley', '123.456.789-08', 'Wesley Presley' );
+
+insert into turma values ( 2023080, 'M', 'Técnico de Informática');
 insert into turma values ( 2023090, 'T', 'Técnico em Comunicação Visual');
+insert into turma values ( 2023100, 'M', 'Técnico em Comunicação Visual');
+
 insert into estuda values ( 7501, 3001, 2023090 );
 insert into estuda values ( null, 3004, 2023080 );
 insert into estuda values ( null, 3002, 2023090 );
@@ -42,6 +53,39 @@ insert into estuda values ( null, 3003, 2023080 );
 insert into estuda values ( null, 3005, 2023090 );
 insert into estuda values ( null, 3006, 2023080 );
 insert into estuda values ( null, 3004, 2023090 );
+insert into estuda values ( null, 3007, 20230100 );
+
+insert into disciplina values (null, 'programação');
+insert into disciplina values (null, 'redes');
+insert into disciplina values (null, 'tratamento de imagem');
+insert into disciplina values (null, 'Lógica de programação');
+
+insert into professor values (101, 'Sérgio', 'TI');
+insert into professor values (null, 'Vicente', 'TI');
+insert into professor values (null, 'Flávia', 'Comunicação Visual');
+insert into professor values (null, 'Jefferson Brandão', 'TI');
+
+insert into possui values (101, 01, 2023080);
+insert into possui values (null, 02, 2023080);
+insert into possui values (null, 03, 2023090);
+insert into possui values (null, 04, 2023080);
+insert into possui values (null, 3, 20230100);
+
+insert into leciona values ( 51, 1, 101);
+insert into leciona values ( null, 2, 102);
+insert into leciona values ( null, 3, 103);
+insert into leciona values ( null, 4, 103);
 
 
+
+
+update aluno set nascimento = '2001-09-11' where matricula = 3005;
+update aluno set nascimento = '2001-09-11' where matricula = 3006;
+insert into estuda values ( null, 3007, 20230100 );
+
+update professor set nome = 'Vicente Orsismo' where matricula = 102;
+update professor set email = 'sergio@email.com' where matricula = 101;
+update professor set email = 'vicenoris@email.com' where matricula = 102;
+update professor set email = 'flav@email.com' where matricula = 103;
+update professor set email = 'jeff@email.com' where matricula = 104;
 
