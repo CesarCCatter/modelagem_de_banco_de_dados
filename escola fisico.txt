@@ -31,16 +31,19 @@ alter table possui add constraint fkdisc foreign key (fk_Disciplina_cod_discipli
 alter table possui add constraint fknum foreign key (fk_turma_numero) references Turma (numero);
 
 alter table professor add email varchar(80) unique after nome;
+alter table professor add dependentes int;
 
 
 
 insert into aluno values ( 3001, 'Godofredo Henrique', '2000-03-15', '123.456.789-01', 'Godojane Maia', 'gh@email.com'  ); 
 insert into aluno values ( null, 'Josefina Winter', '1945-02-10', '123.456.789-02', 'Clenisbaldo Winter', null  ); 
 insert into aluno values (null, 'Ana Carolina', '1984-12-5', '123.456.789-03', 'Maria Carolina', 'ac@email.com');
+insert into aluno values (null, 'Renata Mouse', '1995-03-15', '123.456.789-09', 'Wesley keyboard', 'rn@emeil.com');
 insert into aluno ( matricula, nome, nascimento, cpf, responsavel, email )values (null, 'Elias Sherman', '1995-03-02','123.456.789-05', 'jonh Sherman', 'es@gmailcom');
 insert into aluno ( nome, cpf, responsavel)values ( 'Waldiney Mouse', '123.456.789-06', 'Wesley Keyboard' );
 insert into aluno ( cpf, matricula, nome, responsavel, email ) values ('123.456.789-07', null, 'Genivaldo Willians', 'Clotilde Willians', 'gw@gmail.com');
 insert into aluno ( nome, cpf, responsavel)values ( 'Judite Presley', '123.456.789-08', 'Wesley Presley' );
+insert into aluno values (null, 'Mouse Sherman Willians', '2015-09-12', '123.456.789-10', 'cpu Sherman', null);
 
 insert into turma values ( 2023080, 'M', 'Técnico de Informática');
 insert into turma values ( 2023090, 'T', 'Técnico em Comunicação Visual');
@@ -88,4 +91,33 @@ update professor set email = 'sergio@email.com' where matricula = 101;
 update professor set email = 'vicenoris@email.com' where matricula = 102;
 update professor set email = 'flav@email.com' where matricula = 103;
 update professor set email = 'jeff@email.com' where matricula = 104;
+update professor set dependentes = 3 where matricula = 101;
+update professor set dependentes = 0 where matricula = 102;
+update professor set dependentes = null where matricula = 103;
+update professor set dependentes = 2 where matricula = 104;
 
+
+
+
+
+
+
+
+
+
+COLINHAS
+
+
+select * from aluno where nascimento = '2001-09-11';
+select matricula, nome from aluno order by nome;
+select matricula, nome, responsavel from aluno order by responsavel;
+select matricula, nome, responsavel from aluno order by responsavel desc;
+select * from aluno where matricula >=3004 && matricula <=3007;
+select * from aluno where matricula >=3004 and matricula <=3007;
+select * from aluno where email is null;
+select * from aluno where matricula between 3004 and 3007;
+select * from aluno where matricula in (3002, 3005, 3006);
+select * from aluno where not matricula in (3002, 3005, 3006);
+select * from aluno where nome like'% Mouse%';
+select avg(dependentes) from professor;
+select count(dependentes) from professor where dependentes = 3;
